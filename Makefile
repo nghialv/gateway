@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	go build cmd/gateway/gateway.go
+	go build -o cmd/gateway/gateway cmd/gateway/main.go
 
 .PHONY: gen
 gen:
