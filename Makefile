@@ -7,3 +7,5 @@ gen:
 	go mod tidy
 	buf mod update
 	buf generate
+	mv docs/pkg/* docs/
+	rm -rf docs/pkg
