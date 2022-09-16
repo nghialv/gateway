@@ -21,3 +21,10 @@ dep:
 .PHONY: lint
 lint:
 	buf lint
+
+.PHONY: run/docs
+run/docs:
+	docker run -t -i --rm -p 1313:8080 \
+    -e SWAGGER_JSON=/docs/service/greeting/v2/service.swagger.json \
+    -v ${PWD}/docs/:/docs \
+    swaggerapi/swagger-ui
