@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Greeting
-  version: "1.0"
+  version: "2.0"
 tags:
   - name: GreetingService
 schemes:
@@ -12,14 +12,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /v1/greeting/sayhello:
+  /v2/greeting/sayhello:
     post:
       operationId: GreetingService_SayHello
       responses:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v1HelloResponse'
+            $ref: '#/definitions/v2HelloResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -29,10 +29,15 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/v1HelloRequest'
+            $ref: '#/definitions/v2HelloRequest'
       tags:
         - GreetingService
 definitions:
+  modelUser:
+    type: object
+    properties:
+      name:
+        type: string
   protobufAny:
     type: object
     properties:
@@ -51,13 +56,15 @@ definitions:
           $ref: '#/definitions/protobufAny'
       message:
         type: string
-  v1HelloRequest:
+  v2HelloRequest:
     type: object
     properties:
       name:
         type: string
-  v1HelloResponse:
+  v2HelloResponse:
     type: object
     properties:
       message:
         type: string
+      user:
+        $ref: '#/definitions/modelUser'

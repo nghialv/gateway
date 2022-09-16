@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	gw "github.com/nghialv/gateway/pkg/greetingservice/v1"
+	gw "github.com/nghialv/gateway/pkg/greetingservice/v2"
 )
 
 var (
