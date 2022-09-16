@@ -1,0 +1,15 @@
+syntax = "proto3";
+package your.service.v1;
+option go_package = "github.com/yourorg/yourprotos/gen/go/your/service/v1";
+
+service HelloService {
+    rpc Hi(HiRequest) returns (HiResponse) {}
+}
+
+message HiRequest {
+    string name = 1;
+}
+
+message HiResponse {
+    string message = 1;
+}
