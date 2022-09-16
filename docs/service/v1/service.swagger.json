@@ -1,13 +1,17 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "service.proto",
-    "version": "version not set"
+    "title": "Greeting",
+    "version": "1.0"
   },
   "tags": [
     {
       "name": "GreetingService"
     }
+  ],
+  "schemes": [
+    "http",
+    "https"
   ],
   "consumes": [
     "application/json"

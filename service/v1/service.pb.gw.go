@@ -79,7 +79,7 @@ func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/your.service.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v1/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/service.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v1/greeting/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -143,7 +143,7 @@ func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/your.service.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v1/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/service.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v1/greeting/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
