@@ -6,7 +6,7 @@ option go_package = "github.com/nghialv/gateway/pkg/service/greeting/v2";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
-import "pkg/model/user.proto";
+import "pkg/model/message.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
@@ -20,33 +20,32 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service GreetingService {
-    rpc SayHello(SayHelloRequest) returns (SayHelloResponse) {
+    rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) {
         option (google.api.http) = {
-            post: "/greeting/v2/sayhello"
+            get: "/greeting/v2/messages/{id}"
+        };
+    }
+
+    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
+        option (google.api.http) = {
+            post: "/greeting/v2/messages"
             body: "*"
         };
     }
-
-    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
-        option (google.api.http) = {
-            get: "/greeting/v2/users"
-        };
-    }
 }
 
-message SayHelloRequest {
-    string name = 1 [(validate.rules).string.min_len = 1];
-}
-
-message SayHelloResponse {
-    string message = 1 [(validate.rules).string.min_len = 1];
-    pkg.model.User user = 2;
-}
-
-message GetUserRequest {
+message GetMessageRequest {
     string id = 1 [(validate.rules).string.min_len = 1];
 }
 
-message GetUserResponse {
-    pkg.model.User user = 1;
+message GetMessageResponse {
+    pkg.model.Message message = 1;
+}
+
+message SendMessageRequest {
+    string content = 1 [(validate.rules).string.min_len = 1];
+}
+
+message SendMessageResponse {
+    pkg.model.Message message = 1;
 }

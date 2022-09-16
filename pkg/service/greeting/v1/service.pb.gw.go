@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.Marshaler, client GreetingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SayHelloRequest
+func request_GreetingService_SendMessage_0(ctx context.Context, marshaler runtime.Marshaler, client GreetingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SendMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -43,13 +43,13 @@ func request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.SayHello(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.SendMessage(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.Marshaler, server GreetingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SayHelloRequest
+func local_request_GreetingService_SendMessage_0(ctx context.Context, marshaler runtime.Marshaler, server GreetingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SendMessageRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -60,7 +60,7 @@ func local_request_GreetingService_SayHello_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.SayHello(ctx, &protoReq)
+	msg, err := server.SendMessage(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -71,7 +71,7 @@ func local_request_GreetingService_SayHello_0(ctx context.Context, marshaler run
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterGreetingServiceHandlerFromEndpoint instead.
 func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server GreetingServiceServer) error {
 
-	mux.Handle("POST", pattern_GreetingService_SayHello_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_GreetingService_SendMessage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -79,12 +79,12 @@ func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pkg.service.greeting.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/greeting/v1/sayhello"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pkg.service.greeting.v1.GreetingService/SendMessage", runtime.WithHTTPPathPattern("/greeting/v1/messages"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GreetingService_SayHello_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GreetingService_SendMessage_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -92,7 +92,7 @@ func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 			return
 		}
 
-		forward_GreetingService_SayHello_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GreetingService_SendMessage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -137,25 +137,25 @@ func RegisterGreetingServiceHandler(ctx context.Context, mux *runtime.ServeMux, 
 // "GreetingServiceClient" to call the correct interceptors.
 func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client GreetingServiceClient) error {
 
-	mux.Handle("POST", pattern_GreetingService_SayHello_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_GreetingService_SendMessage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pkg.service.greeting.v1.GreetingService/SayHello", runtime.WithHTTPPathPattern("/greeting/v1/sayhello"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pkg.service.greeting.v1.GreetingService/SendMessage", runtime.WithHTTPPathPattern("/greeting/v1/messages"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GreetingService_SayHello_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GreetingService_SendMessage_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_GreetingService_SayHello_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GreetingService_SendMessage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -163,9 +163,9 @@ func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
-	pattern_GreetingService_SayHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"greeting", "v1", "sayhello"}, ""))
+	pattern_GreetingService_SendMessage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"greeting", "v1", "messages"}, ""))
 )
 
 var (
-	forward_GreetingService_SayHello_0 = runtime.ForwardResponseMessage
+	forward_GreetingService_SendMessage_0 = runtime.ForwardResponseMessage
 )

@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreetingServiceClient interface {
-	SayHello(ctx context.Context, in *SayHelloRequest, opts ...grpc.CallOption) (*SayHelloResponse, error)
+	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
 }
 
 type greetingServiceClient struct {
@@ -33,9 +33,9 @@ func NewGreetingServiceClient(cc grpc.ClientConnInterface) GreetingServiceClient
 	return &greetingServiceClient{cc}
 }
 
-func (c *greetingServiceClient) SayHello(ctx context.Context, in *SayHelloRequest, opts ...grpc.CallOption) (*SayHelloResponse, error) {
-	out := new(SayHelloResponse)
-	err := c.cc.Invoke(ctx, "/pkg.service.greeting.v1.GreetingService/SayHello", in, out, opts...)
+func (c *greetingServiceClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
+	out := new(SendMessageResponse)
+	err := c.cc.Invoke(ctx, "/pkg.service.greeting.v1.GreetingService/SendMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *greetingServiceClient) SayHello(ctx context.Context, in *SayHelloReques
 // All implementations must embed UnimplementedGreetingServiceServer
 // for forward compatibility
 type GreetingServiceServer interface {
-	SayHello(context.Context, *SayHelloRequest) (*SayHelloResponse, error)
+	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
 	mustEmbedUnimplementedGreetingServiceServer()
 }
 
@@ -54,8 +54,8 @@ type GreetingServiceServer interface {
 type UnimplementedGreetingServiceServer struct {
 }
 
-func (UnimplementedGreetingServiceServer) SayHello(context.Context, *SayHelloRequest) (*SayHelloResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+func (UnimplementedGreetingServiceServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
 func (UnimplementedGreetingServiceServer) mustEmbedUnimplementedGreetingServiceServer() {}
 
@@ -70,20 +70,20 @@ func RegisterGreetingServiceServer(s grpc.ServiceRegistrar, srv GreetingServiceS
 	s.RegisterService(&GreetingService_ServiceDesc, srv)
 }
 
-func _GreetingService_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SayHelloRequest)
+func _GreetingService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GreetingServiceServer).SayHello(ctx, in)
+		return srv.(GreetingServiceServer).SendMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.service.greeting.v1.GreetingService/SayHello",
+		FullMethod: "/pkg.service.greeting.v1.GreetingService/SendMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreetingServiceServer).SayHello(ctx, req.(*SayHelloRequest))
+		return srv.(GreetingServiceServer).SendMessage(ctx, req.(*SendMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var GreetingService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*GreetingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _GreetingService_SayHello_Handler,
+			MethodName: "SendMessage",
+			Handler:    _GreetingService_SendMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

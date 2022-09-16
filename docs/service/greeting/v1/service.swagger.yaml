@@ -12,14 +12,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /greeting/v1/sayhello:
+  /greeting/v1/messages:
     post:
-      operationId: GreetingService_SayHello
+      operationId: GreetingService_SendMessage
       responses:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v1SayHelloResponse'
+            $ref: '#/definitions/v1SendMessageResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -29,7 +29,7 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/v1SayHelloRequest'
+            $ref: '#/definitions/v1SendMessageRequest'
       tags:
         - GreetingService
 definitions:
@@ -51,13 +51,10 @@ definitions:
           $ref: '#/definitions/protobufAny'
       message:
         type: string
-  v1SayHelloRequest:
+  v1SendMessageRequest:
     type: object
     properties:
-      name:
+      content:
         type: string
-  v1SayHelloResponse:
+  v1SendMessageResponse:
     type: object
-    properties:
-      message:
-        type: string

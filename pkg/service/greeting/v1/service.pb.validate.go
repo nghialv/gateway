@@ -33,17 +33,17 @@ var (
 	_ = ptypes.DynamicAny{}
 )
 
-// Validate checks the field values on SayHelloRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *SayHelloRequest) Validate() error {
+// Validate checks the field values on SendMessageRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SendMessageRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	if utf8.RuneCountInString(m.GetName()) < 1 {
-		return SayHelloRequestValidationError{
-			field:  "Name",
+	if utf8.RuneCountInString(m.GetContent()) < 1 {
+		return SendMessageRequestValidationError{
+			field:  "Content",
 			reason: "value length must be at least 1 runes",
 		}
 	}
@@ -51,9 +51,9 @@ func (m *SayHelloRequest) Validate() error {
 	return nil
 }
 
-// SayHelloRequestValidationError is the validation error returned by
-// SayHelloRequest.Validate if the designated constraints aren't met.
-type SayHelloRequestValidationError struct {
+// SendMessageRequestValidationError is the validation error returned by
+// SendMessageRequest.Validate if the designated constraints aren't met.
+type SendMessageRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -61,22 +61,24 @@ type SayHelloRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SayHelloRequestValidationError) Field() string { return e.field }
+func (e SendMessageRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SayHelloRequestValidationError) Reason() string { return e.reason }
+func (e SendMessageRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SayHelloRequestValidationError) Cause() error { return e.cause }
+func (e SendMessageRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SayHelloRequestValidationError) Key() bool { return e.key }
+func (e SendMessageRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SayHelloRequestValidationError) ErrorName() string { return "SayHelloRequestValidationError" }
+func (e SendMessageRequestValidationError) ErrorName() string {
+	return "SendMessageRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e SayHelloRequestValidationError) Error() string {
+func (e SendMessageRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -88,14 +90,14 @@ func (e SayHelloRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSayHelloRequest.%s: %s%s",
+		"invalid %sSendMessageRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SayHelloRequestValidationError{}
+var _ error = SendMessageRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -103,29 +105,22 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SayHelloRequestValidationError{}
+} = SendMessageRequestValidationError{}
 
-// Validate checks the field values on SayHelloResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *SayHelloResponse) Validate() error {
+// Validate checks the field values on SendMessageResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SendMessageResponse) Validate() error {
 	if m == nil {
 		return nil
-	}
-
-	if utf8.RuneCountInString(m.GetMessage()) < 1 {
-		return SayHelloResponseValidationError{
-			field:  "Message",
-			reason: "value length must be at least 1 runes",
-		}
 	}
 
 	return nil
 }
 
-// SayHelloResponseValidationError is the validation error returned by
-// SayHelloResponse.Validate if the designated constraints aren't met.
-type SayHelloResponseValidationError struct {
+// SendMessageResponseValidationError is the validation error returned by
+// SendMessageResponse.Validate if the designated constraints aren't met.
+type SendMessageResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -133,22 +128,24 @@ type SayHelloResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SayHelloResponseValidationError) Field() string { return e.field }
+func (e SendMessageResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SayHelloResponseValidationError) Reason() string { return e.reason }
+func (e SendMessageResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SayHelloResponseValidationError) Cause() error { return e.cause }
+func (e SendMessageResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SayHelloResponseValidationError) Key() bool { return e.key }
+func (e SendMessageResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SayHelloResponseValidationError) ErrorName() string { return "SayHelloResponseValidationError" }
+func (e SendMessageResponseValidationError) ErrorName() string {
+	return "SendMessageResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e SayHelloResponseValidationError) Error() string {
+func (e SendMessageResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -160,14 +157,14 @@ func (e SayHelloResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSayHelloResponse.%s: %s%s",
+		"invalid %sSendMessageResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SayHelloResponseValidationError{}
+var _ error = SendMessageResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -175,4 +172,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SayHelloResponseValidationError{}
+} = SendMessageResponseValidationError{}

@@ -22,10 +22,10 @@ func (a *GreetingAPI) Register(server *grpc.Server) {
 	service.RegisterGreetingServiceServer(server, a)
 }
 
-func (a *GreetingAPI) SayHello(ctx context.Context, req *service.SayHelloRequest) (*service.SayHelloResponse, error) {
+func (a *GreetingAPI) GetMessage(ctx context.Context, req *service.GetMessageRequest) (*service.GetMessageResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "")
 }
 
-func (a *GreetingAPI) GetUser(ctx context.Context, req *service.GetUserRequest) (*service.GetUserResponse, error) {
+func (a *GreetingAPI) SendMessage(ctx context.Context, req *service.SendMessageRequest) (*service.SendMessageResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "")
 }

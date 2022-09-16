@@ -12,14 +12,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /greeting/v2/sayhello:
+  /greeting/v2/messages:
     post:
-      operationId: GreetingService_SayHello
+      operationId: GreetingService_SendMessage
       responses:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v2SayHelloResponse'
+            $ref: '#/definitions/v2SendMessageResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -29,33 +29,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/v2SayHelloRequest'
+            $ref: '#/definitions/v2SendMessageRequest'
       tags:
         - GreetingService
-  /greeting/v2/users:
+  /greeting/v2/messages/{id}:
     get:
-      operationId: GreetingService_GetUser
+      operationId: GreetingService_GetMessage
       responses:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v2GetUserResponse'
+            $ref: '#/definitions/v2GetMessageResponse'
         default:
           description: An unexpected error response.
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
         - name: id
-          in: query
-          required: false
+          in: path
+          required: true
           type: string
       tags:
         - GreetingService
 definitions:
-  modelUser:
+  modelMessage:
     type: object
     properties:
-      name:
+      content:
+        type: string
+      createdAt:
+        type: string
+        format: uint64
+      id:
+        type: string
+      sender:
         type: string
   protobufAny:
     type: object
@@ -75,20 +82,18 @@ definitions:
           $ref: '#/definitions/protobufAny'
       message:
         type: string
-  v2GetUserResponse:
-    type: object
-    properties:
-      user:
-        $ref: '#/definitions/modelUser'
-  v2SayHelloRequest:
-    type: object
-    properties:
-      name:
-        type: string
-  v2SayHelloResponse:
+  v2GetMessageResponse:
     type: object
     properties:
       message:
+        $ref: '#/definitions/modelMessage'
+  v2SendMessageRequest:
+    type: object
+    properties:
+      content:
         type: string
-      user:
-        $ref: '#/definitions/modelUser'
+  v2SendMessageResponse:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/modelMessage'

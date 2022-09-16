@@ -19,18 +19,17 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service GreetingService {
-    rpc SayHello(SayHelloRequest) returns (SayHelloResponse) {
+    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
         option (google.api.http) = {
-            post: "/greeting/v1/sayhello"
+            post: "/greeting/v1/messages"
             body: "*"
         };
     }
 }
 
-message SayHelloRequest {
-    string name = 1 [(validate.rules).string.min_len = 1];
+message SendMessageRequest {
+    string content = 1 [(validate.rules).string.min_len = 1];
 }
 
-message SayHelloResponse {
-    string message = 1 [(validate.rules).string.min_len = 1];
+message SendMessageResponse {
 }

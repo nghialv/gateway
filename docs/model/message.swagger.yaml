@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: pkg/model/user.proto
+  title: pkg/model/message.proto
   version: version not set
 consumes:
   - application/json

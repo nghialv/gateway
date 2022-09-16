@@ -33,170 +33,16 @@ var (
 	_ = ptypes.DynamicAny{}
 )
 
-// Validate checks the field values on SayHelloRequest with the rules defined
+// Validate checks the field values on GetMessageRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, an
 // error is returned.
-func (m *SayHelloRequest) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if utf8.RuneCountInString(m.GetName()) < 1 {
-		return SayHelloRequestValidationError{
-			field:  "Name",
-			reason: "value length must be at least 1 runes",
-		}
-	}
-
-	return nil
-}
-
-// SayHelloRequestValidationError is the validation error returned by
-// SayHelloRequest.Validate if the designated constraints aren't met.
-type SayHelloRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SayHelloRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SayHelloRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SayHelloRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SayHelloRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SayHelloRequestValidationError) ErrorName() string { return "SayHelloRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SayHelloRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSayHelloRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SayHelloRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SayHelloRequestValidationError{}
-
-// Validate checks the field values on SayHelloResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *SayHelloResponse) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if utf8.RuneCountInString(m.GetMessage()) < 1 {
-		return SayHelloResponseValidationError{
-			field:  "Message",
-			reason: "value length must be at least 1 runes",
-		}
-	}
-
-	if v, ok := interface{}(m.GetUser()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SayHelloResponseValidationError{
-				field:  "User",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	return nil
-}
-
-// SayHelloResponseValidationError is the validation error returned by
-// SayHelloResponse.Validate if the designated constraints aren't met.
-type SayHelloResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SayHelloResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SayHelloResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SayHelloResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SayHelloResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SayHelloResponseValidationError) ErrorName() string { return "SayHelloResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SayHelloResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSayHelloResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SayHelloResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SayHelloResponseValidationError{}
-
-// Validate checks the field values on GetUserRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *GetUserRequest) Validate() error {
+func (m *GetMessageRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if utf8.RuneCountInString(m.GetId()) < 1 {
-		return GetUserRequestValidationError{
+		return GetMessageRequestValidationError{
 			field:  "Id",
 			reason: "value length must be at least 1 runes",
 		}
@@ -205,9 +51,9 @@ func (m *GetUserRequest) Validate() error {
 	return nil
 }
 
-// GetUserRequestValidationError is the validation error returned by
-// GetUserRequest.Validate if the designated constraints aren't met.
-type GetUserRequestValidationError struct {
+// GetMessageRequestValidationError is the validation error returned by
+// GetMessageRequest.Validate if the designated constraints aren't met.
+type GetMessageRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -215,22 +61,24 @@ type GetUserRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetUserRequestValidationError) Field() string { return e.field }
+func (e GetMessageRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetUserRequestValidationError) Reason() string { return e.reason }
+func (e GetMessageRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetUserRequestValidationError) Cause() error { return e.cause }
+func (e GetMessageRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetUserRequestValidationError) Key() bool { return e.key }
+func (e GetMessageRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetUserRequestValidationError) ErrorName() string { return "GetUserRequestValidationError" }
+func (e GetMessageRequestValidationError) ErrorName() string {
+	return "GetMessageRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetUserRequestValidationError) Error() string {
+func (e GetMessageRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -242,14 +90,14 @@ func (e GetUserRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetUserRequest.%s: %s%s",
+		"invalid %sGetMessageRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetUserRequestValidationError{}
+var _ error = GetMessageRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -257,20 +105,20 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetUserRequestValidationError{}
+} = GetMessageRequestValidationError{}
 
-// Validate checks the field values on GetUserResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *GetUserResponse) Validate() error {
+// Validate checks the field values on GetMessageResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetMessageResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetUser()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetMessage()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetUserResponseValidationError{
-				field:  "User",
+			return GetMessageResponseValidationError{
+				field:  "Message",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -280,9 +128,9 @@ func (m *GetUserResponse) Validate() error {
 	return nil
 }
 
-// GetUserResponseValidationError is the validation error returned by
-// GetUserResponse.Validate if the designated constraints aren't met.
-type GetUserResponseValidationError struct {
+// GetMessageResponseValidationError is the validation error returned by
+// GetMessageResponse.Validate if the designated constraints aren't met.
+type GetMessageResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -290,22 +138,24 @@ type GetUserResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetUserResponseValidationError) Field() string { return e.field }
+func (e GetMessageResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetUserResponseValidationError) Reason() string { return e.reason }
+func (e GetMessageResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetUserResponseValidationError) Cause() error { return e.cause }
+func (e GetMessageResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetUserResponseValidationError) Key() bool { return e.key }
+func (e GetMessageResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetUserResponseValidationError) ErrorName() string { return "GetUserResponseValidationError" }
+func (e GetMessageResponseValidationError) ErrorName() string {
+	return "GetMessageResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetUserResponseValidationError) Error() string {
+func (e GetMessageResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -317,14 +167,14 @@ func (e GetUserResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetUserResponse.%s: %s%s",
+		"invalid %sGetMessageResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetUserResponseValidationError{}
+var _ error = GetMessageResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -332,4 +182,155 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetUserResponseValidationError{}
+} = GetMessageResponseValidationError{}
+
+// Validate checks the field values on SendMessageRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SendMessageRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if utf8.RuneCountInString(m.GetContent()) < 1 {
+		return SendMessageRequestValidationError{
+			field:  "Content",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	return nil
+}
+
+// SendMessageRequestValidationError is the validation error returned by
+// SendMessageRequest.Validate if the designated constraints aren't met.
+type SendMessageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendMessageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendMessageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendMessageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendMessageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendMessageRequestValidationError) ErrorName() string {
+	return "SendMessageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendMessageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendMessageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendMessageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendMessageRequestValidationError{}
+
+// Validate checks the field values on SendMessageResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SendMessageResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetMessage()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendMessageResponseValidationError{
+				field:  "Message",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// SendMessageResponseValidationError is the validation error returned by
+// SendMessageResponse.Validate if the designated constraints aren't met.
+type SendMessageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendMessageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendMessageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendMessageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendMessageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendMessageResponseValidationError) ErrorName() string {
+	return "SendMessageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendMessageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendMessageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendMessageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendMessageResponseValidationError{}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pkg.model;
+option go_package = "github.com/nghialv/gateway/pkg/model";
+
+import "validate/validate.proto";
+
+message Message {
+    string id = 1 [(validate.rules).string.min_len = 1];
+    string content = 2 [(validate.rules).string.min_len = 1];
+    string sender = 3 [(validate.rules).string.min_len = 1];
+    uint64 created_at = 4 [(validate.rules).uint64.gt = 0];
+}
