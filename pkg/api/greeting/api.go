@@ -25,3 +25,7 @@ func (a *GreetingAPI) Register(server *grpc.Server) {
 func (a *GreetingAPI) SayHello(ctx context.Context, req *service.SayHelloRequest) (*service.SayHelloResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "")
 }
+
+func (a *GreetingAPI) GetUser(ctx context.Context, req *service.GetUserRequest) (*service.GetUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "")
+}
