@@ -26,6 +26,12 @@ service GreetingService {
             body: "*"
         };
     }
+
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = {
+            get: "/greeting/v2/users"
+        };
+    }
 }
 
 message SayHelloRequest {
@@ -35,4 +41,12 @@ message SayHelloRequest {
 message SayHelloResponse {
     string message = 1 [(validate.rules).string.min_len = 1];
     pkg.model.User user = 2;
+}
+
+message GetUserRequest {
+    string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetUserResponse {
+    pkg.model.User user = 1;
 }
