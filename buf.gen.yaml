@@ -21,4 +21,4 @@ plugins:
   - name: openapiv2
     out: docs
     opt:
-      - output_format=json
+      - output_format=yaml
