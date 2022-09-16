@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             (unknown)
-// source: pkg/greetingservice/v1/service.proto
+// source: pkg/service/greeting/v2/service.proto
 
-package v1
+package v2
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewGreetingServiceClient(cc grpc.ClientConnInterface) GreetingServiceClient
 
 func (c *greetingServiceClient) SayHello(ctx context.Context, in *SayHelloRequest, opts ...grpc.CallOption) (*SayHelloResponse, error) {
 	out := new(SayHelloResponse)
-	err := c.cc.Invoke(ctx, "/pkg.greetingservice.v1.GreetingService/SayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.service.greeting.v2.GreetingService/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _GreetingService_SayHello_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.greetingservice.v1.GreetingService/SayHello",
+		FullMethod: "/pkg.service.greeting.v2.GreetingService/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GreetingServiceServer).SayHello(ctx, req.(*SayHelloRequest))
@@ -92,7 +92,7 @@ func _GreetingService_SayHello_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GreetingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pkg.greetingservice.v1.GreetingService",
+	ServiceName: "pkg.service.greeting.v2.GreetingService",
 	HandlerType: (*GreetingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -101,5 +101,5 @@ var GreetingService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pkg/greetingservice/v1/service.proto",
+	Metadata: "pkg/service/greeting/v2/service.proto",
 }

@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	gw "github.com/nghialv/gateway/pkg/greetingservice/v2"
+	svc "github.com/nghialv/gateway/pkg/service/greeting/v2"
 )
 
 var (
@@ -28,7 +28,7 @@ func run() error {
 	// Note: Make sure the gRPC server is running properly and accessible
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err := gw.RegisterGreetingServiceHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
+	err := svc.RegisterGreetingServiceHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
 	if err != nil {
 		return err
 	}

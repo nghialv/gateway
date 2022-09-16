@@ -8,12 +8,15 @@ test:
 
 .PHONY: gen
 gen:
-	go mod tidy
-	buf mod update
 	rm -rf docs
 	buf generate
 	mv docs/pkg/* docs/
 	rm -rf docs/pkg
+
+.PHONY: dep
+dep:
+	go mod tidy
+	buf mod update
 
 .PHONY: lint
 lint:
