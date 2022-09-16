@@ -5,6 +5,7 @@ option go_package = "github.com/nghialv/gateway/service/v1";
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
@@ -27,9 +28,9 @@ service GreetingService {
 }
 
 message HelloRequest {
-    string name = 1;
+    string name = 1 [(validate.rules).string.min_len = 1];
 }
 
 message HelloResponse {
-    string message = 1;
+    string message = 1 [(validate.rules).string.min_len = 1];
 }

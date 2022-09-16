@@ -13,5 +13,10 @@ plugins:
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
+  - name: validate
+    out: service/v1
+    opt:
+      - paths=source_relative
+      - lang=go
   - name: openapiv2
     out: docs/service/v1
