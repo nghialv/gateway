@@ -1,0 +1,13 @@
+version: v1
+name: buf.build/nghialv/gatewaymodel
+
+breaking:
+  use:
+    - FILE
+
+lint:
+  use:
+    - DEFAULT
+
+deps:
+  - buf.build/envoyproxy/protoc-gen-validate
