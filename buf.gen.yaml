@@ -1,15 +1,15 @@
 version: v1
 plugins:
   - name: go
-    out: .
+    out: service/v1
     opt:
       - paths=source_relative
   - name: go-grpc
-    out: .
+    out: service/v1
     opt:
       - paths=source_relative
   - name: grpc-gateway
-    out: .
+    out: service/v1
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
