@@ -79,7 +79,7 @@ func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/greeting/v2/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -143,7 +143,7 @@ func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/greeting/v2/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -163,7 +163,7 @@ func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
-	pattern_GreetingService_SayHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v2", "greeting", "sayhello"}, ""))
+	pattern_GreetingService_SayHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"greeting", "v2", "sayhello"}, ""))
 )
 
 var (

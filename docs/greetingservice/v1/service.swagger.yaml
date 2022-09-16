@@ -12,7 +12,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /v1/greeting/sayhello:
+  /greeting/v1/sayhello:
     post:
       operationId: GreetingService_SayHello
       responses:

@@ -10,6 +10,7 @@ test:
 gen:
 	go mod tidy
 	buf mod update
+	rm -rf docs
 	buf generate
 	mv docs/pkg/* docs/
 	rm -rf docs/pkg

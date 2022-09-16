@@ -22,7 +22,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 service GreetingService {
     rpc SayHello(SayHelloRequest) returns (SayHelloResponse) {
         option (google.api.http) = {
-            post: "/v2/greeting/sayhello"
+            post: "/greeting/v2/sayhello"
             body: "*"
         };
     }
