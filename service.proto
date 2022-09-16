@@ -2,14 +2,21 @@ syntax = "proto3";
 package your.service.v1;
 option go_package = "github.com/yourorg/yourprotos/gen/go/your/service/v1";
 
-service HelloService {
-    rpc Hi(HiRequest) returns (HiResponse) {}
+import "google/api/annotations.proto";
+
+service GreetingService {
+    rpc SayHello(HelloRequest) returns (HelloResponse) {
+        option (google.api.http) = {
+            post: "/v1/greeting/sayhello"
+            body: "*"
+        };
+    }
 }
 
-message HiRequest {
+message HelloRequest {
     string name = 1;
 }
 
-message HiResponse {
+message HelloResponse {
     string message = 1;
 }

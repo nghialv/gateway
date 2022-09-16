@@ -5,3 +5,4 @@ gen/code:
 .PHONY: update/dep
 update/dep:
 	go mod tidy
+	buf mod update
