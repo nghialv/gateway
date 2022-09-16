@@ -1,4 +1,0 @@
-version: v1
-directories:
-  - pkg/model
-  - pkg/service/v1

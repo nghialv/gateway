@@ -1,12 +1,9 @@
 .PHONY: build
 build:
-	go build
+	go build cmd/gateway/gateway.go
 
-.PHONY: gen/code
-gen/code:
-	buf generate
-
-.PHONY: update/dep
-update/dep:
+.PHONY: gen
+gen:
 	go mod tidy
 	buf mod update
+	buf generate
