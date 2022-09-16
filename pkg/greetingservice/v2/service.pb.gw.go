@@ -32,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 func request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.Marshaler, client GreetingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq HelloRequest
+	var protoReq SayHelloRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -49,7 +49,7 @@ func request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.M
 }
 
 func local_request_GreetingService_SayHello_0(ctx context.Context, marshaler runtime.Marshaler, server GreetingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq HelloRequest
+	var protoReq SayHelloRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -79,7 +79,7 @@ func RegisterGreetingServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -143,7 +143,7 @@ func RegisterGreetingServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pkg.greetingservice.v2.GreetingService/SayHello", runtime.WithHTTPPathPattern("/v2/greeting/sayhello"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

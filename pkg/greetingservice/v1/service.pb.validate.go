@@ -33,16 +33,16 @@ var (
 	_ = ptypes.DynamicAny{}
 )
 
-// Validate checks the field values on HelloRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *HelloRequest) Validate() error {
+// Validate checks the field values on SayHelloRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *SayHelloRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if utf8.RuneCountInString(m.GetName()) < 1 {
-		return HelloRequestValidationError{
+		return SayHelloRequestValidationError{
 			field:  "Name",
 			reason: "value length must be at least 1 runes",
 		}
@@ -51,9 +51,9 @@ func (m *HelloRequest) Validate() error {
 	return nil
 }
 
-// HelloRequestValidationError is the validation error returned by
-// HelloRequest.Validate if the designated constraints aren't met.
-type HelloRequestValidationError struct {
+// SayHelloRequestValidationError is the validation error returned by
+// SayHelloRequest.Validate if the designated constraints aren't met.
+type SayHelloRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -61,22 +61,22 @@ type HelloRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e HelloRequestValidationError) Field() string { return e.field }
+func (e SayHelloRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e HelloRequestValidationError) Reason() string { return e.reason }
+func (e SayHelloRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e HelloRequestValidationError) Cause() error { return e.cause }
+func (e SayHelloRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e HelloRequestValidationError) Key() bool { return e.key }
+func (e SayHelloRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e HelloRequestValidationError) ErrorName() string { return "HelloRequestValidationError" }
+func (e SayHelloRequestValidationError) ErrorName() string { return "SayHelloRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e HelloRequestValidationError) Error() string {
+func (e SayHelloRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -88,14 +88,14 @@ func (e HelloRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sHelloRequest.%s: %s%s",
+		"invalid %sSayHelloRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = HelloRequestValidationError{}
+var _ error = SayHelloRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -103,18 +103,18 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = HelloRequestValidationError{}
+} = SayHelloRequestValidationError{}
 
-// Validate checks the field values on HelloResponse with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *HelloResponse) Validate() error {
+// Validate checks the field values on SayHelloResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *SayHelloResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if utf8.RuneCountInString(m.GetMessage()) < 1 {
-		return HelloResponseValidationError{
+		return SayHelloResponseValidationError{
 			field:  "Message",
 			reason: "value length must be at least 1 runes",
 		}
@@ -123,9 +123,9 @@ func (m *HelloResponse) Validate() error {
 	return nil
 }
 
-// HelloResponseValidationError is the validation error returned by
-// HelloResponse.Validate if the designated constraints aren't met.
-type HelloResponseValidationError struct {
+// SayHelloResponseValidationError is the validation error returned by
+// SayHelloResponse.Validate if the designated constraints aren't met.
+type SayHelloResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -133,22 +133,22 @@ type HelloResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e HelloResponseValidationError) Field() string { return e.field }
+func (e SayHelloResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e HelloResponseValidationError) Reason() string { return e.reason }
+func (e SayHelloResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e HelloResponseValidationError) Cause() error { return e.cause }
+func (e SayHelloResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e HelloResponseValidationError) Key() bool { return e.key }
+func (e SayHelloResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e HelloResponseValidationError) ErrorName() string { return "HelloResponseValidationError" }
+func (e SayHelloResponseValidationError) ErrorName() string { return "SayHelloResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e HelloResponseValidationError) Error() string {
+func (e SayHelloResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -160,14 +160,14 @@ func (e HelloResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sHelloResponse.%s: %s%s",
+		"invalid %sSayHelloResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = HelloResponseValidationError{}
+var _ error = SayHelloResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -175,4 +175,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = HelloResponseValidationError{}
+} = SayHelloResponseValidationError{}

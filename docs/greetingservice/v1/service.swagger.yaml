@@ -19,7 +19,7 @@ paths:
         "200":
           description: A successful response.
           schema:
-            $ref: '#/definitions/v1HelloResponse'
+            $ref: '#/definitions/v1SayHelloResponse'
         default:
           description: An unexpected error response.
           schema:
@@ -29,7 +29,7 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/v1HelloRequest'
+            $ref: '#/definitions/v1SayHelloRequest'
       tags:
         - GreetingService
 definitions:
@@ -51,12 +51,12 @@ definitions:
           $ref: '#/definitions/protobufAny'
       message:
         type: string
-  v1HelloRequest:
+  v1SayHelloRequest:
     type: object
     properties:
       name:
         type: string
-  v1HelloResponse:
+  v1SayHelloResponse:
     type: object
     properties:
       message:
