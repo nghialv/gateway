@@ -1,5 +1,14 @@
-version: v1
 name: buf.build/nghialv/gateway
+version: v1
+
+breaking:
+  use:
+    - FILE
+
+lint:
+  use:
+    - DEFAULT
+
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/grpc-ecosystem/grpc-gateway
