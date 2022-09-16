@@ -1,11 +1,12 @@
 syntax = "proto3";
 
 package service.v1;
-option go_package = "github.com/nghialv/gateway/service/v1";
+option go_package = "github.com/nghialv/gateway/pkg/service/v1";
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
+//import "pkg/model/user.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     info: {
@@ -33,4 +34,5 @@ message HelloRequest {
 
 message HelloResponse {
     string message = 1 [(validate.rules).string.min_len = 1];
+    //model.User user = 2;
 }

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package model;
-option go_package = "github.com/nghialv/gateway/model";
+option go_package = "github.com/nghialv/gateway/pkg/model";
 
 import "validate/validate.proto";
 

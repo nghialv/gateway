@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/nghialv/gatewayservice
+name: buf.build/nghialv/gatewayservicev1
 
 breaking:
   use:
