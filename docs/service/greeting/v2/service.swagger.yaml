@@ -34,10 +34,11 @@ paths:
         - GreetingService
   /greeting/v2/messages/{id}:
     get:
-      operationId: GreetingService_GetMessage
+      summary: Get a message.
+      operationId: getMessage
       responses:
         "200":
-          description: A successful response.
+          description: OK
           schema:
             $ref: '#/definitions/v2GetMessageResponse'
         default:
@@ -50,20 +51,31 @@ paths:
           required: true
           type: string
       tags:
-        - GreetingService
+        - echo
 definitions:
   modelMessage:
     type: object
     properties:
       content:
         type: string
+        description: String content of message.
       createdAt:
         type: string
         format: uint64
+        description: Unix time when the message was sent.
       id:
         type: string
+        description: Id represents the message identifier.
       sender:
         type: string
+        description: Who sent the message.
+    description: A message model.
+    title: Message
+    required:
+      - id
+      - content
+      - sender
+      - createdAt
   protobufAny:
     type: object
     properties:
@@ -87,6 +99,10 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/modelMessage'
+    description: A simple message.
+    title: GetMessageResponse
+    required:
+      - message
   v2SendMessageRequest:
     type: object
     properties:

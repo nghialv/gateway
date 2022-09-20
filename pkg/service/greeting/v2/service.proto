@@ -24,6 +24,23 @@ service GreetingService {
         option (google.api.http) = {
             get: "/greeting/v2/messages/{id}"
         };
+
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get a message.";
+            operation_id: "getMessage";
+            tags: "echo";
+            responses: {
+                key: "200"
+                value: {
+                    description: "OK";
+                    schema: {
+                        json_schema: {
+                            ref: '#/definitions/v2GetMessageResponse';
+                        }
+                    }
+                }
+            }
+        };
     }
 
     rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
@@ -35,10 +52,24 @@ service GreetingService {
 }
 
 message GetMessageRequest {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "GetMessageRequest"
+            description: "A simple message."
+            required: ["id"]
+        }
+    };
     string id = 1 [(validate.rules).string.min_len = 1];
 }
 
 message GetMessageResponse {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "GetMessageResponse"
+            description: "A simple message."
+            required: ["message"]
+        }
+    };
     pkg.model.Message message = 1;
 }
 
