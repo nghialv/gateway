@@ -22,3 +22,4 @@ plugins:
     out: docs
     opt:
       - output_format=yaml
+      - disable_default_errors=true

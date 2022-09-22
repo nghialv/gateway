@@ -1,82 +1,128 @@
 syntax = "proto3";
 
 package pkg.service.greeting.v2;
-option go_package = "github.com/nghialv/gateway/pkg/service/greeting/v2";
 
 import "google/api/annotations.proto";
+import "pkg/model/message.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
-import "pkg/model/message.proto";
 
+option go_package = "github.com/nghialv/gateway/pkg/service/greeting/v2";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-    info: {
-        title: "Greeting";
-        version: "2.0";
-    };
-    schemes: HTTP;
-    schemes: HTTPS;
-    consumes: "application/json";
-    produces: "application/json";
+  info: {
+    title: "Greeting";
+    version: "2.0";
+  };
+  schemes: HTTP;
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
 };
 
 service GreetingService {
-    rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) {
-        option (google.api.http) = {
-            get: "/greeting/v2/messages/{id}"
-        };
+  rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) {
+    option (google.api.http) = {
+      get: "/greeting/v2/messages/{id}"
+    };
 
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            summary: "Get a message.";
-            operation_id: "getMessage";
-            tags: "echo";
-            responses: {
-                key: "200"
-                value: {
-                    description: "OK";
-                    schema: {
-                        json_schema: {
-                            ref: '#/definitions/v2GetMessageResponse';
-                        }
-                    }
-                }
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get a message.";
+      operation_id: "getMessage";
+      tags: "echo";
+      responses: {
+        key: "200"
+        value: {
+          description: "OK";
+          schema: {
+            json_schema: {
+              ref: '.pkg.service.greeting.v2.GetMessageResponse';
             }
-        };
-    }
+          }
+        }
+      }
+      responses: {
+        key: "400"
+        value: {
+          description: "BadRequest";
+          schema: {
+            json_schema: {
+              ref: ".pkg.service.greeting.v2.ErrorResponse";
+            }
+          }
+        }
+      }
+    };
+  }
 
-    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
-        option (google.api.http) = {
-            post: "/greeting/v2/messages"
-            body: "*"
-        };
-    }
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
+    option (google.api.http) = {
+      post: "/greeting/v2/messages"
+      body: "*"
+    };
+  }
 }
 
 message GetMessageRequest {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "GetMessageRequest"
-            description: "A simple message."
-            required: ["id"]
-        }
-    };
-    string id = 1 [(validate.rules).string.min_len = 1];
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetMessageRequest"
+      description: "A simple message."
+      required: [
+        "id"
+      ]
+    }
+  };
+  string id = 1 [(validate.rules).string.min_len = 1];
 }
 
 message GetMessageResponse {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "GetMessageResponse"
-            description: "A simple message."
-            required: ["message"]
-        }
-    };
-    pkg.model.Message message = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetMessageResponse"
+      description: "A simple message."
+      required: [
+        "message"
+      ]
+    }
+  };
+  pkg.model.Message message = 1;
 }
 
 message SendMessageRequest {
-    string content = 1 [(validate.rules).string.min_len = 1];
+  string content = 1 [(validate.rules).string.min_len = 1];
 }
 
 message SendMessageResponse {
-    pkg.model.Message message = 1;
+  pkg.model.Message message = 1;
+}
+
+message ErrorResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ErrorResponse"
+    }
+  };
+
+  string correlationId = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    pattern: "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$",
+    title: "x-correlation-id",
+    description: "Unique event identifier for server requests",
+    format: "uuid",
+    example: "\"2438ac3c-37eb-4902-adef-ed16b4431030\""
+  }];
+  ErrorObject error = 2;
+}
+
+message ErrorObject {
+  int32 code = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    pattern: "^[0-9]$",
+    title: "code",
+    description: "Response code",
+    format: "integer"
+  }];
+  string message = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    pattern: "^[a-zA-Z0-9]{1, 32}$",
+    title: "message",
+    description: "Response message"
+  }];
 }

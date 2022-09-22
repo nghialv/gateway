@@ -1,35 +1,34 @@
 syntax = "proto3";
 
 package pkg.service.greeting.v1;
-option go_package = "github.com/nghialv/gateway/pkg/service/greeting/v1";
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
 
+option go_package = "github.com/nghialv/gateway/pkg/service/greeting/v1";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-    info: {
-        title: "Greeting";
-        version: "1.0";
-    };
-    schemes: HTTP;
-    schemes: HTTPS;
-    consumes: "application/json";
-    produces: "application/json";
+  info: {
+    title: "Greeting";
+    version: "1.0";
+  };
+  schemes: HTTP;
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
 };
 
 service GreetingService {
-    rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
-        option (google.api.http) = {
-            post: "/greeting/v1/messages"
-            body: "*"
-        };
-    }
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {
+    option (google.api.http) = {
+      post: "/greeting/v1/messages"
+      body: "*"
+    };
+  }
 }
 
 message SendMessageRequest {
-    string content = 1 [(validate.rules).string.min_len = 1];
+  string content = 1 [(validate.rules).string.min_len = 1];
 }
 
-message SendMessageResponse {
-}
+message SendMessageResponse {}

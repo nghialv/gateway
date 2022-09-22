@@ -7,22 +7,4 @@ consumes:
 produces:
   - application/json
 paths: {}
-definitions:
-  protobufAny:
-    type: object
-    properties:
-      '@type':
-        type: string
-    additionalProperties: {}
-  rpcStatus:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      details:
-        type: array
-        items:
-          $ref: '#/definitions/protobufAny'
-      message:
-        type: string
+definitions: {}

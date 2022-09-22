@@ -1,26 +1,32 @@
 syntax = "proto3";
 
 package pkg.model;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+
 option go_package = "github.com/nghialv/gateway/pkg/model";
 
-import "validate/validate.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-
 message Message {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Message"
-            description: "A message model."
-            required: ["id", "content", "sender", "created_at"]
-        }
-    };
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Message"
+      description: "A message model."
+      required: [
+        "id",
+        "content",
+        "sender",
+        "created_at"
+      ]
+    }
+  };
 
-    // Id represents the message identifier.
-    string id = 1 [(validate.rules).string.min_len = 1];
-    // String content of message.
-    string content = 2 [(validate.rules).string.min_len = 1];
-    // Who sent the message.
-    string sender = 3 [(validate.rules).string.min_len = 1];
-    // Unix time when the message was sent.
-    uint64 created_at = 4 [(validate.rules).uint64.gt = 0];
+  // Id represents the message identifier.
+  string id = 1 [(validate.rules).string.min_len = 1];
+  // String content of message.
+  string content = 2 [(validate.rules).string.min_len = 1];
+  // Who sent the message.
+  string sender = 3 [(validate.rules).string.min_len = 1];
+  // Unix time when the message was sent.
+  uint64 created_at = 4 [(validate.rules).uint64.gt = 0];
 }

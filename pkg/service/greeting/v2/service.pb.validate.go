@@ -334,3 +334,149 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendMessageResponseValidationError{}
+
+// Validate checks the field values on ErrorResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *ErrorResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for CorrelationId
+
+	if v, ok := interface{}(m.GetError()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ErrorResponseValidationError{
+				field:  "Error",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// ErrorResponseValidationError is the validation error returned by
+// ErrorResponse.Validate if the designated constraints aren't met.
+type ErrorResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ErrorResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ErrorResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ErrorResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ErrorResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ErrorResponseValidationError) ErrorName() string { return "ErrorResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ErrorResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sErrorResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ErrorResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ErrorResponseValidationError{}
+
+// Validate checks the field values on ErrorObject with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *ErrorObject) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Code
+
+	// no validation rules for Message
+
+	return nil
+}
+
+// ErrorObjectValidationError is the validation error returned by
+// ErrorObject.Validate if the designated constraints aren't met.
+type ErrorObjectValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ErrorObjectValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ErrorObjectValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ErrorObjectValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ErrorObjectValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ErrorObjectValidationError) ErrorName() string { return "ErrorObjectValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ErrorObjectValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sErrorObject.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ErrorObjectValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ErrorObjectValidationError{}
